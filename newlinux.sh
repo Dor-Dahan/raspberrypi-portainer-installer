@@ -64,13 +64,13 @@ echo "updating static ip"
 
 sleep 5
 
-echo "interface wlan0 static" >> ~/etc/dhcpcd.conf
+echo "interface wlan0 static" >> /etc/dhcpcd.conf
 
-echo "ip_address=$ipaddress" >> ~/etc/dhcpcd.conf
+echo "ip_address=$ipaddress/24" >> /etc/dhcpcd.conf
 
-echo "static routers=$staticrouters" >> ~/etc/dhcpcd.conf
+echo "static routers=$staticrouters" >> /etc/dhcpcd.conf
 
-echo "static domain_name_servers=$domainserver" >> ~/etc/dhcpcd.conf
+echo "static domain_name_servers=$domainserver" >> /etc/dhcpcd.conf
 
 sleep 30
 sudo reboot
