@@ -64,9 +64,9 @@ echo "updating static ip"
 
 sleep 5
 
-echo "interface wlan0 static" >> /etc/dhcpcd.conf
+echo "interface wlan0" >> /etc/dhcpcd.conf
 
-echo "ip_address=$ipaddress/24" >> /etc/dhcpcd.conf
+echo "static ip_address=$ipaddress/24" >> /etc/dhcpcd.conf
 
 echo "static routers=$staticrouters" >> /etc/dhcpcd.conf
 
