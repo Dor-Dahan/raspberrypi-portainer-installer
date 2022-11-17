@@ -72,5 +72,11 @@ echo "static routers=$staticrouters" >> /etc/dhcpcd.conf
 
 echo "static domain_name_servers=$domainserver" >> /etc/dhcpcd.conf
 
+sleep 5
+
+echo "finish updating static ip"
+
 sleep 30
+echo "rebooting"
+sleep 5
 sudo reboot
