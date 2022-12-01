@@ -19,6 +19,8 @@ sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -
 sleep 5
 echo "installing pihole"
 sleep 5
+#!/bin/bash
+
 # https://github.com/pi-hole/docker-pi-hole/blob/master/README.md
 
 docker run -d \
@@ -50,7 +52,6 @@ for i in $(seq 1 20); do
         exit 1
     fi
 done;
-
 sleep 5
 
 echo "updating linux"
