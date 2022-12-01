@@ -34,7 +34,7 @@ echo $password
 
 sleep 5
 
-sudo docker run -d --name pihole --net=host -p 53:53/tcp -p 53:53/udp -p 80:80 -p 443:443 -p 8080:8080 -e TZ="$timezone" -e WEBPASSWORD="$password" -v "$(pwd)/etc-pihole/:/etc/pihole/" -v "$(pwd)/etc-dnsmasq.d/:/etc/dnsmasq.d/" --dns=127.0.0.1 --dns=1.1.1.1 --restart=unless-stopped pihole/pihole:latest
+sudo docker run -d --name pihole -p 53:53/tcp -p 53:53/udp -p 80:80 -p 443:443 -p 8080:8080 -p 67:67/udp -e TZ="$timezone" -e WEBPASSWORD="$password" -v "$(pwd)/etc-pihole/:/etc/pihole/" -v "$(pwd)/etc-dnsmasq.d/:/etc/dnsmasq.d/" --dns=127.0.0.1 --dns=1.1.1.1 --restart=unless-stopped pihole/pihole:latest
 
 sleep 5
 
