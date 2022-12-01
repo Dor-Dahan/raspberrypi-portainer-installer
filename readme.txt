@@ -1,1 +1,1 @@
-sudo apt-get install git && git clone https://github.com/Dor-Dahan/raspberrypi-portainer-installer.git && sudo chmod u+x raspberrypi-portainer-installer/newlinux.sh && sudo ./raspberrypi-portainer-installer/newlinux.sh
+sudo apt-get install git -y && git clone https://github.com/Dor-Dahan/raspberrypi-portainer-installer.git && sudo chmod u+x raspberrypi-portainer-installer/newlinux.sh && sudo ./raspberrypi-portainer-installer/newlinux.sh
