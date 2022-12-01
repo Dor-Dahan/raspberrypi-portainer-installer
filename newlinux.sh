@@ -26,14 +26,6 @@ sudo docker run -d --name pihole -p 53:53/tcp -p 53:53/udp -p 80:80 -p 443:443 -
 
 sleep 5
 
-echo "updating linux"
-
-sleep 5
-
-sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
-
-sleep 5
-
 ip r | grep default
 
 grep "nameserver" /etc/resolv.conf
@@ -64,7 +56,19 @@ sleep 5
 
 echo "finish updating static ip"
 
-sleep 30
-echo "rebooting"
 sleep 5
+
+echo "updating linux"
+
+sleep 5
+sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
+
+sleep 5
+
+sleep 30
+
+echo "rebooting"
+
+sleep 5
+
 sudo reboot
