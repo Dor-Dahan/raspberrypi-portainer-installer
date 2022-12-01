@@ -1,7 +1,3 @@
-echo "updating java"
-
-sleep 5
-
 echo "installing docker"
 
 sudo apt install docker.io
