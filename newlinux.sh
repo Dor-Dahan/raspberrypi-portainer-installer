@@ -1,6 +1,6 @@
 echo "installing docker"
 
-sudo apt install docker.io
+sudo apt install docker.io -y
 
 sleep 5
 
