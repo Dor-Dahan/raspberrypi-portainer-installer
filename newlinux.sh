@@ -38,35 +38,7 @@ sudo docker run -d --name pihole -p 53:53/tcp -p 53:53/udp -p 80:80 -p 443:443 -
 
 sleep 5
 
-ip r | grep default
-
-grep "nameserver" /etc/resolv.conf
-
-sleep 5
-
-read -p 'set static ip address: ' ipaddress
-
-read -p 'static routers: ' staticrouters
-
-read -p 'set domin name server: ' domainserver
-
-sleep 5
-
 echo "updating static ip"
-
-sleep 5
-
-echo "interface wlan0" >> /etc/dhcpcd.conf
-
-echo "static ip_address=$ipaddress/24" >> /etc/dhcpcd.conf
-
-echo "static routers=$staticrouters" >> /etc/dhcpcd.conf
-
-echo "static domain_name_servers=$domainserver" >> /etc/dhcpcd.conf
-
-sleep 5
-
-echo "finish updating static ip"
 
 sleep 5
 
