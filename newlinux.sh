@@ -17,15 +17,15 @@ do
                 read static_ip
                 echo "set static routers"
                 read static_routers
-                echo "set static dns"
-                read static_dns
+                #echo "set static dns"
+                #read static_dns
                 sudo echo " interface $static_interface"  >> /etc/dhcpcd.conf
                 sleep 5
                 sudo echo "static ip_address=$static_ip"  >> /etc/dhcpcd.conf
                 sleep 5
                 sudo echo "static routers=$static_routers"  >> /etc/dhcpcd.conf
                 sleep 5
-                sudo echo "static domain_name_servers=$static_dns"  >> /etc/dhcpcd.conf
+                #sudo echo "static domain_name_servers=$static_dns"  >> /etc/dhcpcd.conf
                 sleep 10
                 sudo reboot
                 shift
