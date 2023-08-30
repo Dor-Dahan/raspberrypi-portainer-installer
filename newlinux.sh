@@ -25,6 +25,15 @@ do
                 sleep 5
                 sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
                 sleep 5
+                sudo echo "interface wlan0"  >> /etc/dhcpcd.conf
+                sleep 5
+                sudo echo "static ip_address=192.168.7.29/24"  >> /etc/dhcpcd.conf
+                sleep 5
+                sudo echo "static routers=192.168.7.1"  >> /etc/dhcpcd.conf
+                sleep 5
+                sudo echo "static domain_name_servers=192.168.7.29"  >> /etc/dhcpcd.conf
+                sleep 10
+                sudo reboot
                 shift
         ;;
         -h|-H|h|H)
