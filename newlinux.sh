@@ -15,17 +15,23 @@ do
                 read static_interface
                 echo "set static ip"
                 read static_ip
+                echo "set network "
+                read network
+                echo "set netmask "
+                read netmask 
                 echo "set static routers"
                 read static_routers
-                #echo "set static dns"
-                #read static_dns
-                sudo echo " interface $static_interface"  >> /etc/dhcpcd.conf
+                sudo echo " allow-hotplug $static_interface"  >> /etc/network/interfaces.d/$static_interface
+                sudo echo " iface $static_interface inet static "  >> /etc/network/interfaces.d/$static_interface
                 sleep 5
-                sudo echo "static ip_address=$static_ip"  >> /etc/dhcpcd.conf
+                sudo echo "address $static_ip"  >> /etc/network/interfaces.d/$static_interface
                 sleep 5
-                sudo echo "static routers=$static_routers"  >> /etc/dhcpcd.conf
+                sudo echo "network  $network "  >> /etc/network/interfaces.d/$static_interface
                 sleep 5
-                #sudo echo "static domain_name_servers=$static_dns"  >> /etc/dhcpcd.conf
+                sudo echo "netmask  $netmask "  >> /etc/network/interfaces.d/$static_interface
+                sleep 5
+                sudo echo "gateway $static_routers"  >> /etc/network/interfaces.d/$static_interface
+                sleep 5
                 sleep 10
                 sudo reboot
                 shift
@@ -48,7 +54,7 @@ do
                 sleep 5
                  shift
         ;;
-        -h|-H|h|H)
+        -h|-H|h|H| )
                 shift
                 echo "$usage"
                 shift
