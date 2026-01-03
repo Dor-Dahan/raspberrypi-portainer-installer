@@ -4,8 +4,8 @@ set -e
 UNIFI_DIR="/opt/unifi"
 PIHOLE_DIR="/opt/pihole"
 TZ="Asia/Jerusalem"
-read -p "pihole password: "PIHOLE_PASS
-read -p "mangodb password: "mangodb_PASS
+read -p "pihole password: " PIHOLE_PASS
+read -p "mangodb password: " mangodb_PASS
 SERVER_IP="$(hostname -I | awk '{print $1}')"
 
 echo "=== Install Docker (official repo) ==="
