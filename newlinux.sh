@@ -5,6 +5,7 @@ UNIFI_DIR="/opt/unifi"
 PIHOLE_DIR="/opt/pihole"
 TZ="Asia/Jerusalem"
 read -p "pihole password: " PIHOLE_PASS
+read -p "mangodb password: " mangodb_PASS
 SERVER_IP="$(hostname -I | awk '{print $1}')"
 
 echo "=== Install Docker (official repo) ==="
@@ -44,7 +45,7 @@ fi
 
 "$mongo_bin" <<EOF2
 use admin
-db.auth("root","ddd")
+db.auth("root","$mangodb_PASS")
 db.createUser({
   user: "unifi",
   pwd: "ddd",
@@ -70,7 +71,7 @@ services:
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: ddd
+      MONGO_INITDB_ROOT_PASSWORD: $mangodb_PASS
     volumes:
       - ./db:/data/db
       - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
@@ -129,7 +130,7 @@ mkdir -p $PIHOLE_DIR/{etc-pihole,etc-dnsmasq.d}
 cd $PIHOLE_DIR
 
 echo "=== Create Pi-hole docker-compose.yml ==="
-cat > docker-compose.yml <<EOF
+cat > $BASE_DIR/docker-compose-pihole.yml <<'EOF'
 version: "3.9"
 
 services:
@@ -138,20 +139,30 @@ services:
     container_name: pihole
     restart: unless-stopped
     environment:
-      TZ: "$TZ"
-      WEBPASSWORD: "$PIHOLE_PASS"
-      ServerIP: "$SERVER_IP"
+      TZ: Asia/Jerusalem
+      WEBPASSWORD: changeme
+      ServerIP: 192.168.1.10   # לשנות ל-IP סטטי שלך
     ports:
       - "53:53/tcp"
+      - "80:80/tcp"
+      - "443:443/tcp"
       - "53:53/udp"
       - "67:67/udp"
-      - "80:80"
+
     volumes:
-      - ./etc-pihole:/etc/pihole
-      - ./etc-dnsmasq.d:/etc/dnsmasq.d
+      - pihole:/etc/pihole
+      - dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       - NET_ADMIN
+
+volumes:
+  pihole:
+  dnsmasq.d:
 EOF
+
+echo "=== Start Pi-hole ==="
+docker compose -f $BASE_DIR/docker-compose-pihole.yml up -d
+
 
 docker compose up -d
 
